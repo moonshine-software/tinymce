@@ -4,39 +4,49 @@ declare(strict_types=1);
 
 namespace MoonShine\TinyMce\Fields;
 
+use Closure;
 use MoonShine\AssetManager\Css;
 use MoonShine\AssetManager\Js;
 use MoonShine\UI\Fields\Textarea;
 
 class TinyMce extends Textarea
 {
+    const VERSION = '6';
+
     protected string $view = 'moonshine-tinymce::fields.tinymce';
 
-    public array $plugins = [
-        'anchor', 'autolink', 'autoresize', 'charmap', 'codesample', 'code', 'emoticons', 'image', 'link',
-        'lists', 'advlist', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'directionality',
-        'fullscreen', 'help', 'nonbreaking', 'pagebreak', 'preview', 'visualblocks', 'visualchars',
-    ];
+    protected array $plugins = [];
 
-    public string $menubar = 'file edit insert view format table tools';
+    protected string|bool $menubar = '';
 
-    public string $toolbar = 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table tabledelete hr nonbreaking pagebreak | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | codesample | ltr rtl | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | fullscreen preview print visualblocks visualchars code | help';
+    protected string|bool|array $toolbar = '';
 
-    public string $addedToolbar = '';
-
-    public array $mergeTags = [];
-
-    public string $commentAuthor = '';
+    protected array $options = [];
 
     public string $locale = '';
 
-    public array $config = [];
+    protected array $reservedOptions = [
+        'selector',
+        'path_absolute',
+        'relative_urls',
+        'branding',
+        'skin',
+        'file_picker_callback',
+        'language',
+        'plugins',
+        'menubar',
+        'toolbar',
+    ];
 
-    public static string $token = '';
+    public function __construct(string|Closure|null $label = null, ?string $column = null, ?Closure $formatted = null)
+    {
+        $this->plugins = config('moonshine_tinymce.plugins', []);
+        $this->menubar = config('moonshine_tinymce.menubar', '');
+        $this->toolbar = config('moonshine_tinymce.toolbar', '');
+        $this->options = config('moonshine_tinymce.options', []);
 
-    public static string $version = '6';
-
-    public static ?string $fileManagerUrl = null;
+        parent::__construct($label, $column, $formatted);
+    }
 
     public function getAssets(): array
     {
@@ -53,139 +63,76 @@ class TinyMce extends Textarea
         return $assets;
     }
 
-    public static function token(string $token): void
-    {
-        self::$token = $token;
-    }
-
     protected function getToken(): string
     {
-        return self::$token;
-    }
-
-    public static function version(string $version): void
-    {
-        self::$token = $version;
+        return config('moonshine-tinymce.token', '');
     }
 
     protected function getVersion(): string
     {
-        return self::$version;
+        return self::VERSION;
     }
 
-    public static function fileManager(string $url): void
+    public function locale(string $locale): self
     {
-        self::$fileManagerUrl = $url;
-    }
-
-    protected function getFileManagerUrl(): ?string
-    {
-        return self::$fileManagerUrl;
-    }
-
-    public function mergeTags(array $mergeTags): self
-    {
-        $this->mergeTags = $mergeTags;
+        $this->locale = $locale;
 
         return $this;
     }
 
-    public function commentAuthor(string $commentAuthor): self
+    public function plugins(array $plugins): self
     {
-        $this->commentAuthor = $commentAuthor;
-
-        return $this;
-    }
-
-    public function plugins(string|array $plugins): self
-    {
-        if (is_string($plugins)) {
-            $plugins = explode(' ', $plugins);
-        }
-
         $this->plugins = $plugins;
+
+        return $this;
+    }
+
+    public function addPlugins(array $plugins): self
+    {
+        $this->plugins = array_merge($this->plugins, $plugins);
+
+        return $this;
+    }
+
+    public function removePlugins(array $plugins): self
+    {
+        $this->plugins = array_diff($this->plugins, $plugins);
 
         return $this;
     }
 
     public function getPlugins(): array
     {
-        $plugins = $this->plugins;
-
-        return collect($plugins)->unique()->toArray();
+        return array_unique($this->plugins);
     }
 
-    public function menubar(string $menubar): self
+    public function menubar(string|bool $menubar): self
     {
         $this->menubar = $menubar;
 
         return $this;
     }
 
-    public function toolbar(string $toolbar): self
+    public function toolbar(string|bool|array $toolbar): self
     {
         $this->toolbar = $toolbar;
 
         return $this;
     }
 
-    public function addConfig(string $name, mixed $value): self
+    public function addOption(string $name, string|int|float|bool|array $value): self
     {
         $name = str($name)->lower()->value();
 
-        $reservedNames = [
-            'selector',
-            'path_absolute',
-            'file_manager',
-            'relative_urls',
-            'branding',
-            'skin',
-            'file_picker_callback',
-            'language',
-            'plugins',
-            'menubar',
-            'toolbar',
-            'tinycomments_mode',
-            'tinycomments_author',
-            'mergetags_list',
-        ];
+        if (in_array($name, $this->reservedOptions)) {
+            return $this;
+        }
 
         if (is_string($value) && str($value)->isJson()) {
             $value = json_decode($value, true);
         }
 
-        if (! in_array($name, $reservedNames)) {
-            $this->config[$name] = $value;
-        }
-
-        return $this;
-    }
-
-    public function addPlugins(string|array $plugins): self
-    {
-        if (is_string($plugins)) {
-            $plugins = explode(' ', $plugins);
-        }
-
-        $this->plugins = array_merge($this->plugins, $plugins);
-
-        return $this;
-    }
-
-    public function removePlugins(string|array $plugins): self
-    {
-        if (is_string($plugins)) {
-            $plugins = explode(' ', $plugins);
-        }
-
-        $this->plugins = array_diff($this->plugins, $plugins);
-
-        return $this;
-    }
-
-    public function addToolbar(string $toolbar): self
-    {
-        $this->addedToolbar = $toolbar;
+        $this->options[$name] = $value;
 
         return $this;
     }
@@ -196,23 +143,10 @@ class TinyMce extends Textarea
             'toolbar_mode' => 'sliding',
             'language' => ! empty($this->locale) ? $this->locale : app()->getLocale(),
             'plugins' => implode(' ', $this->getPlugins()),
-            'menubar' => trim($this->menubar),
-            'toolbar' => trim($this->toolbar . ' ' . $this->addedToolbar),
-            'tinycomments_mode' => $this->commentAuthor === '' || $this->commentAuthor === '0' ? null : 'embedded',
-            'tinycomments_author' => $this->commentAuthor === '' || $this->commentAuthor === '0' ? null : $this->commentAuthor,
-            'mergetags_list' => $this->mergeTags === []
-                ? null
-                : json_encode($this->mergeTags, JSON_THROW_ON_ERROR),
-            'file_manager' => $this->getFileManagerUrl(),
-            ...$this->config,
+            'menubar' => $this->menubar,
+            'toolbar' => $this->toolbar,
+            ...$this->options,
         ];
-    }
-
-    public function locale(string $locale): self
-    {
-        $this->locale = $locale;
-
-        return $this;
     }
 
     protected function resolveValue(): string
