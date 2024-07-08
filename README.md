@@ -3,9 +3,9 @@
 Extends [Textarea](https://moonshine-laravel.com/docs/resource/fields/fields-textarea) and has the same features
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/moonshine-software/tinymce/blob/main/art/tinymce_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/moonshine-software/tinymce/blob/main/art/tinymce.png">
-    <img alt="windows" src="https://github.com/moonshine-software/tinymce/blob/main/art/tinymce.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/moonshine-software/tinymce/main/art/tinymce_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/moonshine-software/tinymce/main/art/tinymce.png">
+    <img alt="windows" src="https://raw.githubusercontent.com/moonshine-software/tinymce/main/art/tinymce.png">
 </picture>
 
 > [!IMPORTANT]
@@ -107,6 +107,7 @@ use MoonShine\TinyMce\Fields\TinyMce;
 TinyMce::make('Description')
     ->addPlugins(['wordcount'])
 ```
+
 The `removePlugins()` method allows you to exclude plugins that the field will use
 
 ```php
@@ -136,6 +137,7 @@ use MoonShine\TinyMce\Fields\TinyMce;
 TinyMce::make('Description')
     ->menubar('file edit view')
 ```
+
 ## Toolbar
 
 The `toolbar()` method allows you to completely override toolbar for a field
@@ -150,19 +152,6 @@ use MoonShine\TinyMce\Fields\TinyMce;
 
 TinyMce::make('Description')
     ->toolbar('file edit view')
-```
-The `addToolbar()` method allows you to add new plugins to the default plugins
-
-```php
-addToolbar(string $toolbar)
-```
-```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
-TinyMce::make('Description')
-    ->addToolbar(' | code codesample')
 ```
 
 ## Options
@@ -195,6 +184,7 @@ composer require unisharp/laravel-filemanager
 php artisan vendor:publish --tag=lfm_config
 php artisan vendor:publish --tag=lfm_public
 ```
+
 > [!NOTE]
 > Be sure to set the 'use_package_routes' flag in the lfm config to false, otherwise caching routes will cause an error.
 
@@ -214,6 +204,7 @@ Route::prefix('laravel-filemanager')->group(function () {
     Lfm::routes();
 });
 ```
+
 ### File registration
 
 Register the generated routes file in `app/Providers/RouteServiceProvider.php`
