@@ -143,7 +143,7 @@ TinyMce::make('Description')
 The `toolbar()` method allows you to completely override toolbar for a field
 
 ```php
-toolbar(string $toolbar)
+toolbar(string|bool|array $toolbar)
 ```
 ```php
 use MoonShine\TinyMce\Fields\TinyMce;
