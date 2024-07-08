@@ -5,8 +5,7 @@
 ])
 <div class="tinymce">
     <x-moonshine::form.textarea
-        :attributes="$attributes->except('x-bind:id')"
-        ::id="$id('tiny-mce')"
+        :attributes="$attributes"
         x-data="tinymce({{ $config }})"
     >{!! $value ?? '' !!}</x-moonshine::form.textarea>
 </div>

@@ -46,15 +46,13 @@ document.addEventListener('alpine:init', () => {
                 ...this.config,
                 file_picker_callback: this.config.file_manager ? fileManager : null,
                 init_instance_callback: editor =>
-                    editor.on('blur', () => (this.$el.innerHTML = editor.getContent())),
-                setup: editor => {
-                    editorInstance = editor
-                },
+                    editor.on('blur', () => tinymce.activeEditor.save()),
             })
 
             tinymce.init(config(Alpine.store('darkMode').on))
-
-            window.addEventListener('darkMode:toggle', () => tinymce.remove(editorInstance))
         }
     }))
+
+    window.addEventListener('darkMode:toggle', () => tinymce.remove())
 })
+
