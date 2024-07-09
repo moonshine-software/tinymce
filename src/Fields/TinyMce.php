@@ -11,7 +11,7 @@ use MoonShine\UI\Fields\Textarea;
 
 class TinyMce extends Textarea
 {
-    const VERSION = '6';
+    const VERSION = '7';
 
     protected string $view = 'moonshine-tinymce::fields.tinymce';
 
@@ -53,9 +53,9 @@ class TinyMce extends Textarea
     public function getAssets(): array
     {
         $assets = [
-            Css::make('vendor/moonshine-tinymce/tinymce.css'),
             Js::make('vendor/moonshine-tinymce/tinymce.min.js'),
             Js::make('vendor/moonshine-tinymce/tinymce-init.js'),
+            Css::make('vendor/moonshine-tinymce/tinymce.css'),
         ];
 
         if ($this->getToken()) {
