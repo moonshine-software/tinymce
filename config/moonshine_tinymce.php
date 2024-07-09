@@ -15,4 +15,5 @@ return [
         . 'tableinsertcolbefore tableinsertcolafter tabledeletecol | '
         . 'fullscreen preview print visualblocks visualchars code | help',
     'options' => [],
+    'callbacks' => [],
 ];

@@ -23,6 +23,8 @@ class TinyMce extends Textarea
 
     protected array $options = [];
 
+    protected array $callbacks = [];
+
     public string $locale = '';
 
     protected array $reservedOptions = [
@@ -31,7 +33,6 @@ class TinyMce extends Textarea
         'relative_urls',
         'branding',
         'skin',
-        'file_picker_callback',
         'language',
         'plugins',
         'menubar',
@@ -44,6 +45,7 @@ class TinyMce extends Textarea
         $this->menubar = config('moonshine_tinymce.menubar', '');
         $this->toolbar = config('moonshine_tinymce.toolbar', '');
         $this->options = config('moonshine_tinymce.options', []);
+        $this->callbacks = config('moonshine_tinymce.callbacks', []);
 
         parent::__construct($label, $column, $formatted);
     }
@@ -137,16 +139,34 @@ class TinyMce extends Textarea
         return $this;
     }
 
-    public function getConfig(): array
+    public function addCallback(string $name, string $value): self
+    {
+        $name = str($name)->lower()->value();
+
+        if (in_array($name, $this->reservedOptions)) {
+            return $this;
+        }
+
+        $this->callbacks[$name] = $value;
+
+        return $this;
+    }
+
+    public function getOptions(): array
     {
         return [
             'toolbar_mode' => 'sliding',
-            'language' => ! empty($this->locale) ? $this->locale : app()->getLocale(),
+            'language' => !empty($this->locale) ? $this->locale : app()->getLocale(),
             'plugins' => implode(' ', $this->getPlugins()),
             'menubar' => $this->menubar,
             'toolbar' => $this->toolbar,
             ...$this->options,
         ];
+    }
+
+    public function getCallbacks(): array
+    {
+        return $this->callbacks;
     }
 
     protected function resolveValue(): string
@@ -163,7 +183,8 @@ class TinyMce extends Textarea
     protected function viewData(): array
     {
         return [
-            'config' => json_encode($this->getConfig()),
+            'options' => json_encode($this->getOptions()),
+            'callbacks' => json_encode($this->getCallbacks())
         ];
     }
 }

@@ -168,6 +168,20 @@ use MoonShine\TinyMce\Fields\TinyMce;
 
 TinyMce::make('Description')
     ->addOption('forced_root_block', 'div')
+
+```
+The `addCallback()` method allows you to add callback options for a field
+
+```php
+addCallback(string $name, string $value)
+```
+```php
+use MoonShine\TinyMce\Fields\TinyMce;
+
+// ...
+
+TinyMce::make('Description')
+    ->addCallback('setup', '(editor) => console.log(editor)')
 ```
 
 > [!NOTE]
