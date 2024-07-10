@@ -40,11 +40,6 @@ class TinyMceFieldTest extends TestCase
         $this->assertEmpty($this->field->getAttributes()->get('type'));
     }
 
-    public function testView(): void
-    {
-        $this->assertEquals('moonshine-tinymce::fields.tinymce', $this->field->getView());
-    }
-
     public function testHasAssets(): void {
         $this->assertNotEmpty($this->field->getAssets());
         $this->assertIsArray($this->field->getAssets());
@@ -185,6 +180,25 @@ class TinyMceFieldTest extends TestCase
         $this->field->addCallback('setup', $callback);
         $this->assertIsString($this->getCallback('setup'));
         $this->assertEquals($callback, $this->getCallback('setup'));
+    }
+
+    public function testView(): void
+    {
+        $this->field
+            ->locale('en')
+            ->plugins(['code', 'image', 'link'])
+            ->menubar('file')
+            ->toolbar('undo redo')
+            ->addOption('height', 500)
+            ->addCallback('setup', '(editor) => console.log(editor)');
+
+        $this->assertEquals('moonshine-tinymce::fields.tinymce', $this->field->getView());
+
+        $html = $this->field->render()->toHtml();
+        $this->assertStringContainsString('x-data', $html);
+        $this->assertStringContainsString('tinymce', $html);
+        $this->assertStringContainsString(htmlspecialchars(json_encode($this->field->getOptions())), $html);
+        $this->assertStringContainsString(htmlspecialchars(json_encode($this->field->getCallbacks())), $html);
     }
 
     private function getOption(string $key, ?TinyMce $field = null)
