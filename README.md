@@ -45,7 +45,7 @@ TinyMce::make('Description')
 To change the default settings, you need to publish the configuration file:
 
 ```php
-php artisan vendor:publish --tag="moonshine-tinymce-assets"
+php artisan vendor:publish --tag="moonshine-tinymce-config"
 ```
 
 You can also add additional options to the configuration file that will apply to all `TinyMce` fields
