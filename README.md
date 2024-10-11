@@ -33,7 +33,6 @@ composer require moonshine/tinymce
 ```php
 use MoonShine\TinyMce\Fields\TinyMce;
 
-// ...
 
 TinyMce::make('Description')
 ```
@@ -66,10 +65,6 @@ The default is your application's locale, but using the `locale()` method you ca
 locale(string $locale)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->locale('ru');
 ```
@@ -86,10 +81,6 @@ The `plugins()` method allows you to completely override the plugins that the fi
 plugins(array $plugins)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->plugins(['code', 'image', 'link', 'media', 'table'])
 ```
@@ -100,10 +91,6 @@ The `addPlugins()` method allows you to add new plugins to the default plugins
 addPlugins(array $plugins)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->addPlugins(['wordcount'])
 ```
@@ -114,10 +101,6 @@ The `removePlugins()` method allows you to exclude plugins that the field will u
 removePlugins(array $plugins)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->removePlugins(['autoresize'])
 ```
@@ -130,10 +113,6 @@ The `menubar()` method allows you to completely override menubar for a field
 menubar(string|bool $menubar)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->menubar('file edit view')
 ```
@@ -146,10 +125,6 @@ The `toolbar()` method allows you to completely override toolbar for a field
 toolbar(string|bool|array $toolbar)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->toolbar('file edit view')
 ```
@@ -162,10 +137,6 @@ The `addOption()` method allows you to add additional options for a field
 addOption(string $name, string|int|float|bool|array $value)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->addOption('forced_root_block', 'div')
 
@@ -176,10 +147,6 @@ The `addCallback()` method allows you to add callback options for a field
 addCallback(string $name, string $value)
 ```
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->addCallback('setup', '(editor) => console.log(editor)')
 ```
@@ -268,10 +235,6 @@ public function boot()
 You need to add an option for the field
 
 ```php
-use MoonShine\TinyMce\Fields\TinyMce;
-
-// ...
-
 TinyMce::make('Description')
     ->addOptions([
         'file_manager' => 'laravel-filemanager',
