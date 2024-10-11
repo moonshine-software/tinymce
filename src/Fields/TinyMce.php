@@ -54,7 +54,7 @@ class TinyMce extends Textarea
     {
         $assets = [
             Js::make('vendor/moonshine-tinymce/tinymce.min.js'),
-            Js::make('vendor/moonshine-tinymce/tinymce-init.js'),
+            Js::make('vendor/moonshine-tinymce/init.js'),
             Css::make('vendor/moonshine-tinymce/tinymce.css'),
         ];
 
