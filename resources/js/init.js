@@ -34,7 +34,6 @@ document.addEventListener('alpine:init', () => {
         '?editor=' +
         meta.fieldname +
         (meta.filetype === 'image' ? '&type=Images' : '&type=Files')
-      console.log(cmsURL)
 
       tinymce.activeEditor.windowManager.openUrl({
         url: cmsURL,
