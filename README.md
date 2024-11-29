@@ -209,10 +209,10 @@ public function boot()
 ```
 
 > [!IMPORTANT]
-> In order to allow access only to users authorized in the admin panel you need to add middleware `MoonShine\Http\Middleware\Authenticate.`
+> In order to allow access only to users authorized in the admin panel you need to add middleware `MoonShine\Laravel\Http\Middleware\Authenticate.`
 
 ```php
-use MoonShine\Http\Middleware\Authenticate;
+use MoonShine\Laravel\Http\Middleware\Authenticate;
 
 // ...
 
