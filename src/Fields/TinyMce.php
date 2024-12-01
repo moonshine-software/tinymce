@@ -50,7 +50,7 @@ class TinyMce extends Textarea
         parent::__construct($label, $column, $formatted);
     }
 
-    public function getAssets(): array
+    protected function assets(): array
     {
         $assets = [
             Js::make('vendor/moonshine-tinymce/tinymce.min.js'),
