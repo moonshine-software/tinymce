@@ -13,7 +13,7 @@
 }
 
 .tinymce .tox-tinymce {
-  @apply rounded-md border border-gray-300 outline-none transition-all duration-200 dark:border-[rgb(var(--dark-300))] bg-slate-100 dark:bg-[rgb(var(--dark-900))]  text-inherit;
+  @apply rounded-md border border-gray-300 outline-none transition-colors duration-200 dark:border-[rgb(var(--dark-300))] bg-slate-100 dark:bg-[rgb(var(--dark-900))]  text-inherit;
 }
 
 .tinymce .tox-tinymce.tox-edit-focus {
