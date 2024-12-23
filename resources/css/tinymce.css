@@ -49,7 +49,6 @@
 .tinymce .tox .tox-edit-area::before {
   @apply border-none;
 }
-
 .tinymce .tox .tox-menubar,
 .tinymce .tox .tox-statusbar,
 .tinymce .tox .tox-toolbar,
@@ -65,6 +64,9 @@
 .tinymce .tox .tox-mbtn
 {
   @apply bg-transparent;
+}
+.tox.tox-tinymce.tox-fullscreen {
+  @apply !bg-slate-100 dark:!bg-[rgb(var(--dark-900))];
 }
 .tinymce .tox .tox-mbtn:hover,
 .tinymce .tox .tox-mbtn:hover:not(:disabled):not(.tox-mbtn--active),
