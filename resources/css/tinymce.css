@@ -13,32 +13,32 @@
 }
 
 .tinymce .tox-tinymce {
-  @apply rounded-md border border-gray-300 outline-none transition-colors duration-200 dark:border-[rgb(var(--dark-300))] bg-slate-100 dark:bg-[rgb(var(--dark-900))]  text-inherit;
+  @apply rounded-md border border-gray-300 outline-none transition-colors duration-200 dark:border-dark-300 bg-slate-100 dark:bg-dark-900 text-inherit;
 }
 
 .tinymce .tox-tinymce.tox-edit-focus {
-  @apply ring ring-gray-200 ring-opacity-70
+  @apply ring ring-gray-200 ring-opacity-70 dark:ring-dark-100 dark:ring-opacity-30;
 }
-.dark .tinymce .tox-tinymce.tox-edit-focus {
-  --tw-ring-color: rgba(var(--dark-100), 0.3);
-}
-.tinymce:has(.form-invalid) .tox-tinymce {
+.tinymce:has(.form-invalid) .tox-tinymce,
+.tinymce:has(:invalid) .tox-tinymce {
   @apply border-red-600 dark:border-red-700;
 }
-.tinymce:has(.form-invalid) .tox-tinymce.tox-edit-focus {
+.tinymce:has(.form-invalid) .tox-tinymce.tox-edit-focus,
+.tinymce:has(:invalid) .tox-tinymce.tox-edit-focus
+{
   @apply ring-red-400 ring-opacity-20 dark:ring-red-600 dark:ring-opacity-40;
 }
 
 .tinymce .tox:not(.tox-tinymce-inline) .tox-editor-header {
-  @apply border-solid border-b border-gray-300 dark:border-[rgb(var(--dark-300))] shadow-none;
+  @apply border-solid border-b border-gray-300 dark:border-dark-300 shadow-none;
 }
 
 .tinymce .tox .tox-statusbar {
-  @apply border-t border-gray-300 dark:border-[rgb(var(--dark-300))] shadow-none;
+  @apply border-t border-gray-300 dark:border-dark-300 shadow-none;
 }
 
 .tinymce .tox .tox-edit-area__iframe {
-  @apply bg-white dark:bg-[rgb(var(--dark-800))]
+  @apply bg-white dark:bg-dark-800;
 }
 
 .tinymce .tox .tox-mbtn:focus:not(:disabled)::after,
@@ -66,7 +66,7 @@
   @apply bg-transparent;
 }
 .tox.tox-tinymce.tox-fullscreen {
-  @apply !bg-slate-100 dark:!bg-[rgb(var(--dark-900))];
+  @apply !bg-slate-100 dark:!bg-dark-900;
 }
 .tinymce .tox .tox-mbtn:hover,
 .tinymce .tox .tox-mbtn:hover:not(:disabled):not(.tox-mbtn--active),
