@@ -19,13 +19,10 @@
 .tinymce .tox-tinymce.tox-edit-focus {
   @apply ring ring-gray-200 ring-opacity-70 dark:ring-dark-100 dark:ring-opacity-30;
 }
-.tinymce:has(.form-invalid) .tox-tinymce,
-.tinymce:has(:invalid) .tox-tinymce {
+.tinymce:has(.form-invalid) .tox-tinymce {
   @apply border-red-600 dark:border-red-700;
 }
-.tinymce:has(.form-invalid) .tox-tinymce.tox-edit-focus,
-.tinymce:has(:invalid) .tox-tinymce.tox-edit-focus
-{
+.tinymce:has(.form-invalid) .tox-tinymce.tox-edit-focus {
   @apply ring-red-400 ring-opacity-20 dark:ring-red-600 dark:ring-opacity-40;
 }
 
