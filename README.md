@@ -236,7 +236,7 @@ You need to add an option for the field
 
 ```php
 TinyMce::make('Description')
-    ->addOptions([
+    ->addOption([
         'file_manager' => 'laravel-filemanager',
     ])
 ```
