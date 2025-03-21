@@ -236,9 +236,9 @@ You need to add an option for the field
 
 ```php
 TinyMce::make('Description')
-    ->addOption([
+    ->addOption(
         'file_manager' => 'laravel-filemanager',
-    ])
+    )
 ```
 or add in the `config/moonshine_tinymce.php` configuration file to apply to all `TinyMCe` fields
 
