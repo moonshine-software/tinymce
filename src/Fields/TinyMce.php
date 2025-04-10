@@ -67,7 +67,7 @@ class TinyMce extends Textarea
 
     protected function getToken(): string
     {
-        return config('moonshine-tinymce.token', '');
+        return config('moonshine_tinymce.token', '');
     }
 
     protected function getVersion(): string
