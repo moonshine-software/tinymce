@@ -12,7 +12,7 @@ document.addEventListener('alpine:init', () => {
         tinymce.EditorManager
       )
 
-      editor.on('blur', () => tinymce.activeEditor.save())
+      editor.on('focusout', () => tinymce.activeEditor.save())
       editor.render()
 
       window.addEventListener('darkMode:toggle', () => tinymce.remove(editor))
