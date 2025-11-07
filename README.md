@@ -19,11 +19,13 @@ TINYMCE_TOKEN="YOUR_TOKEN"
 
 ## Compatibility
 
-|      MoonShine       | Moonshine TinyMce | Currently supported |
-|:--------------------:|:-----------------:|:-------------------:|
-|       >= v3.0        |     >= v1.0.0     |         yes         |
+| MoonShine | Moonshine TinyMce | Currently supported |
+|:---------:|:-----------------:|:-------------------:|
+|  >= v3.0  |     >= v1.0.0     |         yes         |
+|  >= v4.0  |     >= v2.0.0     |         yes         |
 
 ## Installation
+
 ```shell
 composer require moonshine/tinymce
 ```
@@ -64,6 +66,7 @@ The default is your application's locale, but using the `locale()` method you ca
 ```php
 locale(string $locale)
 ```
+
 ```php
 TinyMce::make('Description')
     ->locale('ru');
@@ -80,6 +83,7 @@ The `plugins()` method allows you to completely override the plugins that the fi
 ```php
 plugins(array $plugins)
 ```
+
 ```php
 TinyMce::make('Description')
     ->plugins(['code', 'image', 'link', 'media', 'table'])
@@ -90,6 +94,7 @@ The `addPlugins()` method allows you to add new plugins to the default plugins
 ```php
 addPlugins(array $plugins)
 ```
+
 ```php
 TinyMce::make('Description')
     ->addPlugins(['wordcount'])
@@ -100,6 +105,7 @@ The `removePlugins()` method allows you to exclude plugins that the field will u
 ```php
 removePlugins(array $plugins)
 ```
+
 ```php
 TinyMce::make('Description')
     ->removePlugins(['autoresize'])
@@ -112,6 +118,7 @@ The `menubar()` method allows you to completely override menubar for a field
 ```php
 menubar(string|bool $menubar)
 ```
+
 ```php
 TinyMce::make('Description')
     ->menubar('file edit view')
@@ -124,6 +131,7 @@ The `toolbar()` method allows you to completely override toolbar for a field
 ```php
 toolbar(string|bool|array $toolbar)
 ```
+
 ```php
 TinyMce::make('Description')
     ->toolbar('file edit view')
@@ -136,16 +144,19 @@ The `addOption()` method allows you to add additional options for a field
 ```php
 addOption(string $name, string|int|float|bool|array $value)
 ```
+
 ```php
 TinyMce::make('Description')
     ->addOption('forced_root_block', 'div')
 
 ```
+
 The `addCallback()` method allows you to add callback options for a field
 
 ```php
 addCallback(string $name, string $value)
 ```
+
 ```php
 TinyMce::make('Description')
     ->addCallback('setup', '(editor) => console.log(editor)')
@@ -159,6 +170,7 @@ TinyMce::make('Description')
 If you want to use the file manager in TinyMce, you need to install the package [Laravel FileManager](https://github.com/UniSharp/laravel-filemanager)
 
 ### Installation
+
 ```php
 composer require unisharp/laravel-filemanager
 
@@ -174,7 +186,9 @@ php artisan vendor:publish --tag=lfm_public
 
 'use_package_routes' => false,
 ```
+
 ### Routes file
+
 Create a routes file like `routes/moonshine.php` and register the LaravelFilemanager routes.
 
 ```php
@@ -238,6 +252,7 @@ You need to add an option for the field
 TinyMce::make('Description')
     ->addOption('file_manager', 'laravel-filemanager')
 ```
+
 or add in the `config/moonshine_tinymce.php` configuration file to apply to all `TinyMCe` fields
 
 ```php
