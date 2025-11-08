@@ -60,6 +60,7 @@ document.addEventListener('alpine:init', () => {
           height: 50,
           skin: darkMode ? 'oxide-dark' : 'oxide',
           content_css: darkMode ? 'dark' : 'default',
+          content_style: `[data-mce-placeholder]::before {color: var(--ms-cm-base-text) !important; opacity: .5;}`,
           file_picker_callback: this.options.file_manager ? this.fileManager : null,
         },
         this.options,
